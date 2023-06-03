@@ -1,3 +1,88 @@
 .App {
   text-align: center;
+  padding: 10px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.mainDiv {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 20px;
+}
+
+.orderDetails,
+.foodList {
+  border: 1px solid grey;
+  border-radius: 20px;
+  color: #000;
+  font-size: 20px;
+}
+
+.foodList {
+  grid-template-columns: auto auto;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.main_block {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 20px;
+  padding: 20px;
+  color: wheat;
+}
+
+#block,
+.orderItem {
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px red;
+  border: 1px solid gainsboro;
+  padding: 20px;
+  background: red;
+  color: wheat;
+}
+#block {
+  cursor: pointer;
+}
+#block:hover {
+  box-shadow: 0 0 20px 0 red;
+}
+#block:active {
+  background: rgb(215, 12, 12);
+}
+h3 {
+  margin-top: -10px;
+}
+.total {
+  border-radius: 10px;
+  box-shadow: 0 0 250px 26px rgb(13, 119, 40);
+  border: 1px solid gainsboro;
+  margin: 10px;
+  padding: 20px;
+  background: green;
+}
+.total {
+  font-weight: 900;
+  color: #fff;
+}
+button {
+  padding: 10px 55px;
+  background: yellow;
+  border: none;
+  border-radius: 5px;
+  font-weight: inherit;
+  font-size: medium;
+  color: rgb(255, 0, 0);
+  cursor: pointer;
+}
+button:hover {
+  box-shadow: 0 0 20px 0 yellow;
+}
+button:active {
+  background: rgb(246, 246, 18);
 }

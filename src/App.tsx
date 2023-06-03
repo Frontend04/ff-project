@@ -2,11 +2,11 @@ import React, { useState, MouseEvent } from "react";
 import "./App.css";
 import Food from "./components/Food";
 import HamBurgerImage from "./assets/hamBurger.png";
-import CheeseBurgerImage from "./assets/CheeseBurger.png";
-import FriesImage from "./assets/fries.png";
-import CoffeeImage from "./assets/coffee.png";
+import CheeseBurgerImage from "./assets/cheeseBurger.png";
+import FriesImage from "./assets/fries.jpeg";
+import CoffeeImage from "./assets/coffee.jpeg";
 import TeaImage from "./assets/tea.png";
-import ColaImage from "./assets/cola.png";
+import ColaImage from "./assets/cola.jpeg";
 
 interface OrderItem {
   name: string;
@@ -33,15 +33,15 @@ const App: React.FC = () => {
   const addItem = (event: MouseEvent<HTMLDivElement>) => {
     const name = event.currentTarget.className;
     const index = foodArr.findIndex((item) => item.name === name);
-    const index2 = foodArr.findIndex((item) => item.name === name);
+    const index2 = orderList.findIndex((item) => item.name === name);
 
     setSign({ part1: "", part2: "" });
     let price = foodArr[index].price;
 
     if (orderList.length > 0 && index2 > -1) {
-      const updateOrderList = [...orderList];
-      updateOrderList[index2].count++;
-      setOrderList(updateOrderList);
+      const updatedOrderList = [...orderList];
+      updatedOrderList[index2].count++;
+      setOrderList(updatedOrderList);
     } else {
       const newItem: OrderItem = { name, price, count: 1 };
       setOrderList((prevOrderList) => [...prevOrderList, newItem]);
@@ -50,7 +50,7 @@ const App: React.FC = () => {
   };
   const deleteItem = (event: MouseEvent<HTMLButtonElement>) => {
     const name = event.currentTarget.className;
-    const index = foodArr.findIndex((item) => item.name === name);
+    const index = orderList.findIndex((item) => item.name === name);
 
     if (index > -1 && orderList[index].count > 0) {
       const price = orderList[index].price;
@@ -58,13 +58,47 @@ const App: React.FC = () => {
       updatedOrderList[index].count--;
 
       if (updatedOrderList[index].count === 0) {
-        updatedOrderList.splice(index, 0);
+        updatedOrderList.splice(index, 1);
       }
       setOrderList(updatedOrderList);
-      setTotal((prevTotal) => prevTotal - price)
+      setTotal((prevTotal) => prevTotal - price);
     }
   };
-  return <div className="App mainDiv"></div>;
+  return (
+    <div className="App mainDiv">
+      <div className="foodList">
+        <p>Food List</p>
+        <div className="main_block">
+          {foodArr.map((item, index) => (
+            <Food
+              key={index}
+              name={item.name}
+              price={item.price}
+              src={item.src}
+              onClickAdd={addItem}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="orderDetails">
+        <p>Order Details</p>
+        <div className="sign">
+          <p>{sign.part1}</p>
+          <p> {sign.part2}</p>
+        </div>
+        {orderList.map((order, index) => (
+          <div key={index} className="orderItem">
+            {order.name + " X " + order.count}
+            <p>{order.price * order.count + " KGS"}</p>
+            <button className={order.name} onClick={deleteItem}>
+              Delete
+            </button>
+          </div>
+        ))}
+        <div className="total">Total: {total}</div>
+      </div>
+    </div>
+  );
 };
 
 export default App;
