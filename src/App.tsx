@@ -48,7 +48,22 @@ const App: React.FC = () => {
     }
     setTotal((prevTotal) => prevTotal + price);
   };
+  const deleteItem = (event: MouseEvent<HTMLButtonElement>) => {
+    const name = event.currentTarget.className;
+    const index = foodArr.findIndex((item) => item.name === name);
 
+    if (index > -1 && orderList[index].count > 0) {
+      const price = orderList[index].price;
+      const updatedOrderList = [...orderList];
+      updatedOrderList[index].count--;
+
+      if (updatedOrderList[index].count === 0) {
+        updatedOrderList.splice(index, 0);
+      }
+      setOrderList(updatedOrderList);
+      setTotal((prevTotal) => prevTotal - price)
+    }
+  };
   return <div className="App mainDiv"></div>;
 };
 
